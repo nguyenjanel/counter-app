@@ -20,7 +20,8 @@ export class CounterApp extends DDDSuper(I18NMixin(LitElement)) {
 
   constructor() {
     super();
-    this.title = "";
+    this.count = 0;
+    
     this.t = this.t || {};
     this.t = {
       ...this.t,
@@ -39,7 +40,7 @@ export class CounterApp extends DDDSuper(I18NMixin(LitElement)) {
   static get properties() {
     return {
       ...super.properties,
-      title: { type: String },
+      count: { type: Number, reflect: true },
     };
   }
 
@@ -53,12 +54,18 @@ export class CounterApp extends DDDSuper(I18NMixin(LitElement)) {
         background-color: var(--ddd-theme-accent);
         font-family: var(--ddd-font-navigation);
       }
+      :host([count="10"]){
+        color: var(--ddd-theme-athertonViolet);
+      }
+      :host([count="20"]){
+        color: var(--ddd-theme-error);
+      }
       .wrapper {
         margin: var(--ddd-spacing-2);
         padding: var(--ddd-spacing-4);
       }
-      h3 span {
-        font-size: var(--counter-app-label-font-size, var(--ddd-font-size-s));
+      .counter {
+        font-size: var(--counter-app-label-font-size, var(--ddd-font-size-xxl));
       }
     `];
   }
@@ -66,12 +73,24 @@ export class CounterApp extends DDDSuper(I18NMixin(LitElement)) {
   // Lit render the HTML
   render() {
     return html`
-<div class="wrapper">
-  <h3><span>${this.t.title}:</span> ${this.title}</h3>
-  <slot></slot>
-</div>`;
+    <div class="wrapper"></div>
+    <div class="counter">${this.count}</div>
+    <div class="buttons">
+      <button @click=${this.decrease}>-</button>
+      <button @click=${this.reset}>Reset</button>
+      <button @click=${this.increase}>+</button>
+    </div>
+    `;
   }
-
+  increase(){
+    this.count++;
+  }
+  decrease(){
+    this.count--;
+  }
+  reset(){
+    this.count = 0;
+  }
   /**
    * haxProperties integration via file reference
    */
