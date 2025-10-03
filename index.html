@@ -14,11 +14,19 @@
     }
     #demo {
       margin: var(--ddd-spacing-2);
+      text-align: center;
+      justify-content: center;
+      align-items: center;
+      display: flex;
+      flex-direction: column;
     }
     counter-app {
+      background-color: var(--ddd-theme-default-alertNonEmergency);
       margin: var(--ddd-spacing-2);
-      border: var(--ddd-border-md);
+      border: var(--ddd-border-lg);
       border-radius: var(--ddd-radius-lg);
+      width: 400px;
+      padding: 25px;
     }
     counter-app:hover {
       box-shadow: var(--ddd-boxShadow-sm);
@@ -28,22 +36,30 @@
       background-color: var(--ddd-accent-2);
       color: var(--ddd-primary-17);
     }
+    .counter-content{
+      display: flex;   
+      width: 400px; 
+    }
+ 
   </style>
   <title>counter-app</title>
 </head>
 
 <body>
   <div id="demo">
-    <h1>counter-app</h1>
+    <h1>Counter App</h1>
     <!-- this is going to do whatever the tag's defaults are -->
-    <h2>Default</h2>
-    <counter-app></counter-app>
+    <confetti-container id="confetti">
+      <div class="counter-content">   
+        <counter-app></counter-app>
+      </div>
+    </confetti-container>
   </div>
   <script type="module" src="./counter-app.js"></script>
 
   <!-- Take HAX, the Web and you further down the rabbit hole -->
   <style>
-    
+
   </style>
   
 </body>
